@@ -1,11 +1,9 @@
 package com.thoughtworks.biblioteca;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -14,26 +12,13 @@ import static org.mockito.Mockito.verify;
  */
 public class BookTest {
 
-    PrintStream printStream;
-    Book book;
-
-    @Before
-    public void init(){
-        printStream = mock(PrintStream.class);
-        book = new Book("The Hungry Caterpillar", "Eric Carle", "1969", printStream);
-    }
-
     @Test
     public void shouldFormatDetailsIntoColumnsWhenPrintingDetails() {
+        PrintStream printStream = mock(PrintStream.class);
+        Book book = new Book("The Hungry Caterpillar", "Eric Carle", "1969", printStream);
+
         book.printDetails();
 
         verify(printStream).println("The Hungry Caterpillar        | Eric Carle                    | 1969");
-    }
-
-    @Test
-    public void shouldMarkBookAsCheckedOutAfterCheckingBookOut(){
-        book.checkOut();
-
-        assertTrue(book.isCheckedOut());
     }
 }
